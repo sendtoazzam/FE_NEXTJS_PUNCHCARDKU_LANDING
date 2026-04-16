@@ -63,3 +63,16 @@ Optional template:
 ## Deployment
 
 For FTP/manual deployment, upload the correct build output folder (`.next-production`, `.next-development`, or `.next-sandbox`) based on the target environment.
+
+## Troubleshooting
+
+- Hydration mismatch in header/theme icon:
+  - Ensure theme is initialized with a stable default (`light`) and restored from localStorage after mount.
+- Theme not persisting:
+  - Confirm browser localStorage is available and `punchcardku-theme` is not blocked/cleared.
+- Wrong environment after build/start:
+  - Make sure you run matching commands, for example:
+    - build with `npm run build:production`
+    - start with `npm run start:production`
+- Build output uploaded incorrectly (FTP):
+  - Verify you uploaded the correct target folder (`.next-production`, `.next-development`, or `.next-sandbox`).
