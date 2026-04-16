@@ -1,0 +1,41 @@
+{
+  "name": "finwise",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run build:all",
+    "start": "npm run start:production",
+    "start:production": "node scripts/start-with-env.mjs production .next-production",
+    "start:development": "node scripts/start-with-env.mjs development .next-development",
+    "start:sandbox": "node scripts/start-with-env.mjs sandbox .next-sandbox",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
+    "test": "npm run lint",
+    "build:production": "node scripts/build-with-env.mjs production .next-production .env.production",
+    "build:development": "node scripts/build-with-env.mjs development .next-development .env.development",
+    "build:sandbox": "node scripts/build-with-env.mjs sandbox .next-sandbox .env.sandbox",
+    "build:all": "npm run build:production && npm run build:development && npm run build:sandbox"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.10",
+    "@next/third-parties": "^16.2.4",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-icons": "^5.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "daisyui": "^5.5.4",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
+  }
+}

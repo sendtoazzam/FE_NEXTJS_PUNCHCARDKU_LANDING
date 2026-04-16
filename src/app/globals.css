@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-primary: #fed835;
+  --color-secondary: #304fff;
+  --color-primary-accent: #e5c230;
+  --color-foreground-accent: #454545;
+  --color-hero-background: #f3f3f5;
+}
+
+:root[data-theme="light"] {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-primary: #fed835;
+  --color-secondary: #304fff;
+  --color-primary-accent: #e5c230;
+  --color-foreground-accent: #454545;
+  --color-hero-background: #f3f3f5;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --color-background: #0f1117;
+  --color-foreground: #f3f4f6;
+  --color-primary: #fed835;
+  --color-secondary: #7f92ff;
+  --color-primary-accent: #f4cb25;
+  --color-foreground-accent: #c7ced8;
+  --color-hero-background: #171b24;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-foreground);
+  background: var(--color-background);
+  /* Equivalent to Tailwind `text-lg` (font-size: 1.125rem; line-height: 1.75rem) */
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.manrope {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+#logos svg {
+  width: fit-content;
+  height: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  #logos svg {
+    height: 3rem;
+  }
+}
+
+.benefit-section:last-of-type > div {
+  margin-bottom: 2.5rem;
+}
