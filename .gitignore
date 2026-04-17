@@ -9,12 +9,18 @@
 # testing
 /coverage
 
+# Generated on build from deploy/.htaccess (see scripts/build-with-env.mjs)
+/public/.htaccess
+
 # next.js
 /.next/
 /.next-development/
 /.next-production/
 /.next-sandbox/
 /out/
+/out-production/
+/out-development/
+/out-sandbox/
 
 # production
 /build

@@ -62,19 +62,21 @@ const FAQ: React.FC = () => {
                         </AnimatePresence>
                       </span>
                     </DisclosureButton>
-                    <AnimatePresence initial={false}>
-                      {open && (
-                        <DisclosurePanel static as={motion.div}
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25, ease: "easeInOut" }}
-                          className="px-4 pt-4 pb-2 text-foreground-accent overflow-hidden"
-                        >
-                          {faq.answer}
-                        </DisclosurePanel>
-                      )}
-                    </AnimatePresence>
+                    <DisclosurePanel static className="overflow-hidden">
+                      <AnimatePresence initial={false}>
+                        {open && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                            className="px-4 pt-4 pb-2 text-foreground-accent overflow-hidden"
+                          >
+                            {faq.answer}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </DisclosurePanel>
                   </>
                 )}
               </Disclosure>

@@ -43,6 +43,15 @@ try {
   fs.copyFileSync(sourceEnvFile, targetEnvProduction);
   fs.copyFileSync(sourceEnvFile, targetEnvLocal);
 
+  // Copy Apache .htaccess before build so `output: "export"` includes it in `out/`.
+  const htaccessSrc = path.join(projectRoot, "deploy", ".htaccess");
+  const htaccessPublic = path.join(projectRoot, "public", ".htaccess");
+  if (fileExists(htaccessSrc)) {
+    fs.mkdirSync(path.dirname(htaccessPublic), { recursive: true });
+    fs.copyFileSync(htaccessSrc, htaccessPublic);
+    console.log("[build-with-env] copied deploy/.htaccess -> public/.htaccess");
+  }
+
   const env = {
     ...process.env,
     NEXT_DIST_DIR: distDir,
@@ -65,6 +74,21 @@ try {
 
   if (result.status !== 0) {
     process.exit(result.status ?? 1);
+  }
+
+  // With `output: "export"` + custom `NEXT_DIST_DIR`, Next writes the static site into
+  // that dist folder (e.g. `.next-production/`), not `./out`.
+  const exportDir = path.join(projectRoot, distDir);
+  const namedOutDir = path.join(projectRoot, `out-${envName}`);
+  if (fileExists(exportDir) && fileExists(path.join(exportDir, "index.html"))) {
+    fs.rmSync(namedOutDir, { recursive: true, force: true });
+    fs.renameSync(exportDir, namedOutDir);
+    console.log(`[build-with-env] static export -> ${path.basename(namedOutDir)}/`);
+  } else {
+    console.error(
+      `[build-with-env] expected static export in ${distDir} (missing index.html). Check next.config output: "export".`
+    );
+    process.exit(1);
   }
 } finally {
   // Restore previous env files.
