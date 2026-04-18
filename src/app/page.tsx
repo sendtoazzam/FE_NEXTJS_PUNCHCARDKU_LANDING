@@ -2,9 +2,9 @@ import {
   Benefits,
   CTA,
   FAQ,
+  FundingPricing,
   Hero,
   Logos,
-  Pricing,
   Stats,
   Testimonials,
 } from "@/components/pages/home";
@@ -21,9 +21,9 @@ const HomePage: React.FC = () => {
         <Section
           id="pricing"
           title="Pricing"
-          description="Simple, transparent pricing. No surprises."
+          description="Free to start. If this helps your team, consider funding the roadmap."
         >
-          <Pricing />
+          <FundingPricing />
         </Section>
 
         <Section

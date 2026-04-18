@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Transition } from '@headlessui/react';
 import { HiOutlineXMark, HiBars3 } from 'react-icons/hi2';
 import { FaFingerprint } from 'react-icons/fa';
@@ -15,6 +16,7 @@ import { menuItems } from '@/data/menuItems';
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -31,6 +33,11 @@ const Header: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const resolveMenuUrl = (url: string): string => {
+    if (!url.startsWith('#')) return url;
+    return pathname === '/' ? url : `/${url}`;
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 mx-auto w-full transition-colors duration-200 ${
       isScrolled ? 'bg-background shadow-md' : 'bg-transparent shadow-none'
@@ -40,7 +47,7 @@ const Header: React.FC = () => {
           className="mx-auto flex justify-between items-center py-2 px-5 md:py-6 transition-all duration-200"
         >
           <Link href="/" className="flex items-center gap-2">
-            <FaFingerprint className="text-foreground min-w-fit w-7 h-7" />
+            <FaFingerprint className="text-primary min-w-fit w-7 h-7" />
             <span className="manrope text-xl font-semibold text-foreground cursor-pointer">
               {siteDetails.siteName}
             </span>
@@ -49,14 +56,32 @@ const Header: React.FC = () => {
           <ul className="hidden md:flex items-center gap-5">
             {menuItems.map((item) => (
               <li key={item.text}>
-                <Link href={item.url} className="text-foreground hover:text-foreground-accent transition-colors">
+                <Link href={resolveMenuUrl(item.url)} className="text-foreground hover:text-foreground-accent transition-colors">
                   {item.text}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="#cta" className="text-black text-base font-medium bg-primary hover:bg-primary-accent px-6 py-2.5 rounded-full transition-colors leading-none">
-                Download
+              <Link
+                href="/client/sign-up"
+                className="group inline-flex items-center gap-1 text-black text-base font-medium bg-primary hover:bg-primary-accent px-6 py-2.5 rounded-full transition-colors leading-none"
+              >
+                <span>Try Now</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                >
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
               </Link>
             </li>
             {/* <li>
@@ -103,14 +128,14 @@ const Header: React.FC = () => {
           <ul className="flex flex-col space-y-4 pt-1 pb-6 px-6">
             {menuItems.map((item) => (
               <li key={item.text}>
-                <Link href={item.url} className="text-foreground hover:text-primary block" onClick={toggleMenu}>
+                <Link href={resolveMenuUrl(item.url)} className="text-foreground hover:text-primary block" onClick={toggleMenu}>
                   {item.text}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="#cta" className="text-black bg-primary hover:bg-primary-accent px-5 py-2 rounded-full block w-fit" onClick={toggleMenu}>
-                Get Started
+              <Link href="/client/sign-up" className="text-black bg-primary hover:bg-primary-accent px-5 py-2 rounded-full block w-fit" onClick={toggleMenu}>
+                Try Now
               </Link>
             </li>
             {/* <li>

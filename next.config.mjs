@@ -13,6 +13,7 @@ const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   images: {
     unoptimized: true,
+    qualities: [75, 100],
   },
   turbopack: {
     root: __dirname,

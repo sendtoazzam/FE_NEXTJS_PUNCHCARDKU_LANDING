@@ -45,6 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
+      <head />
       <body
         suppressHydrationWarning
         className={`${manrope.className} ${sourceSans.className} antialiased`}
